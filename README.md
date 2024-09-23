@@ -1,4 +1,5 @@
 Recipe Finder
+
 Welcome to the Recipe Finder! This web application allows users to search for recipes based on the ingredients they have. It fetches data from The Meal DB API and presents delicious meal options with images and instructions.
 
 Features
