@@ -1,38 +1,15 @@
-# create-svelte
+Recipe Finder
+Welcome to the Recipe Finder! This web application allows users to search for recipes based on the ingredients they have. It fetches data from The Meal DB API and presents delicious meal options with images and instructions.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Features
+Search for Recipes: Enter ingredients to find matching recipes.
+Dynamic Loading: Displays a loading indicator while fetching data.
+Recipe Details: View details for each recipe including instructions and a link to a video.
+Responsive Design: Works seamlessly across various devices.
 
-## Creating a project
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Technologies Used
+HTML/CSS: For structuring and styling the application.
+Svelte: For building the user interface with a reactive approach.
+JavaScript: For handling API requests and dynamic content.
+The Meal DB API: Used for fetching recipe data.
