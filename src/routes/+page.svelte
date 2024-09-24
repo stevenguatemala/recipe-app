@@ -33,28 +33,34 @@
         <!-- New div with class "meal-result" added below "meal-search" -->
         <div class="meals-result">
           <h2>Your Recipe Search Results:</h2>
+          
           <div id="meal">
             {#if $loading.status === 'LOADING'}
-     <Loading />
-    {:else if Array.isArray(meals) && meals.length > 0}
-      {#each meals as meal}
-        <div class="meal-item" data-id="{meal.idMeal}">
-          <div class="meal-img">
-            <img src="{meal.strMealThumb}" alt="food">
+              <Loading />
+            {:else if Array.isArray(meals) && meals.length > 0}
+              {#each meals as meal}
+                <div class="meal-item" data-id="{meal.idMeal}">
+                  <div class="meal-img">
+                    <img src="{meal.strMealThumb}" alt="food">
+                  </div>
+                  <div class="meal-name">
+                    <h3>{meal.strMeal}</h3>
+                    <a href="#" class="recipe-btn">Get Recipe</a>
+                  </div>
+                </div>
+              {/each}
+            {/if}
           </div>
-          <div class="meal-name">
-            <h3>{meal.strMeal}</h3>
-            <!-- svelte-ignore a11y-invalid-attribute -->
-            <a href="#" class="recipe-btn">Get Recipe</a>
-          </div>
+          
+          {#if !($loading.status === 'LOADING') && hasSearched && (!Array.isArray(meals) || meals.length === 0)}
+            <div id="no-results">
+              <p class="no-results">Sorry, we didn't find any recipes to share!</p>
+            </div>
+          {/if}
         </div>
-      {/each}
-    <!-- {:else}
-      <p>Sorry, we didn't find any recipes to share!</p> -->
-  {/if}
-           
-          </div>
-        </div>
+        
+        
+        
 
         <div class="meal-details">
           <button
@@ -115,6 +121,8 @@
   import { writable } from 'svelte/store'
   import Loading from '$lib/loading.svelte';
   import { error } from '@sveltejs/kit';
+
+  
  
 
   
@@ -156,9 +164,13 @@
       
     }
 
+    let hasSearched = false;
+
+
     function handleSearch() {
       // @ts-ignore
       const query = document.getElementById('search').value;
+      hasSearched = true;
       fetchMeals(query);
     }
     
@@ -168,18 +180,6 @@
       initializeEventListeners();
     });
 
-    // This should trigger the loading indicator from $lib/loading if it takes longer that a certain amount of time 
-    // async function fetchMeals() {
-    //   loading.setLoading(true);
-
-    //   try {
-    //     await new Promise(resolve => setTimeout(resolve, 2500));
-    //   } catch (error) {
-    //     console.log('Error fetching meals:', error);
-    //   } finally {
-    //     loading.setLoading(false);
-    //   }
-    // }
 
 
   </script>

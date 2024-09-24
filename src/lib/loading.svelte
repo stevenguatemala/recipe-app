@@ -10,7 +10,6 @@
     }
 </script>
 
-{$loading.status}
 
 {#if $loading.status === "LOADING"}
 <div />

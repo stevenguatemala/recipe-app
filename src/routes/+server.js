@@ -80,8 +80,3 @@ function mealRecipeModal(meals) {
         console.error('Modal elements not found.');
     }
 }
-
-
-
-
-
