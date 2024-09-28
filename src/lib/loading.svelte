@@ -23,7 +23,10 @@
 
 div {
     --size: 100px;
-    position: fixed;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     inset: calc(50% - calc(var(--size)/2));
     background-color: #A4AC86;
     border-radius: var(--size);

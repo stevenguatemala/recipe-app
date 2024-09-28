@@ -10,7 +10,7 @@
   <body>
     <div class="container">
       <div class="meal-wrapper">
-        <h2 class="title">Find A Recipe Here</h2>
+        <h2 class="title" on:click={refreshPage}>Find A Recipe Here</h2>
         <blockquote></blockquote>
         <div class="meal-search">
           <div class="meal-search-box">
@@ -30,37 +30,44 @@
             </button>
           </div>
         </div>
-        <!-- New div with class "meal-result" added below "meal-search" -->
+       
         <div class="meals-result">
           <h2>Your Recipe Search Results:</h2>
-          
-          <div id="meal">
-            {#if $loading.status === 'LOADING'}
-              <Loading />
-            {:else if Array.isArray(meals) && meals.length > 0}
-              {#each meals as meal}
-                <div class="meal-item" data-id="{meal.idMeal}">
-                  <div class="meal-img">
-                    <img src="{meal.strMealThumb}" alt="food">
-                  </div>
-                  <div class="meal-name">
-                    <h3>{meal.strMeal}</h3>
-                    <a href="#" class="recipe-btn">Get Recipe</a>
-                  </div>
-                </div>
-              {/each}
-            {/if}
-          </div>
-          
-          {#if !($loading.status === 'LOADING') && hasSearched && (!Array.isArray(meals) || meals.length === 0)}
-            <div id="no-results">
-              <p class="no-results">Sorry, we didn't find any recipes to share!</p>
-            </div>
+      
+          <!-- Loading Indicator in its own div -->
+          {#if $loading.status === 'LOADING'}
+              <div class="loading-indicator">
+                  <Loading />
+              </div>
           {/if}
-        </div>
-        
-        
-        
+      
+          <div id="meal">
+              {#if Array.isArray(meals) && meals.length > 0}
+                  {#each meals as meal}
+                      <div class="meal-item" data-id="{meal.idMeal}">
+                          <div class="meal-img">
+                              <img src="{meal.strMealThumb}" alt="food">
+                          </div>
+                          <div class="meal-name">
+                              <h3>{meal.strMeal}</h3>
+                              <a href="#" class="recipe-btn">Get Recipe</a>
+                          </div>
+                      </div>
+                  {/each}
+              {/if}
+          </div>
+      
+          {#if !($loading.status === 'LOADING') && hasSearched && (!Array.isArray(meals) || meals.length === 0)}
+              <div id="no-results">
+                  <p class="results-message">Sorry, we didn't find any recipes to share!</p>
+                  <!-- <li>Try searching a different ingredient</li>
+                  <li>If you are looking to start over, try refreshing the page</li> -->
+                  <h1>Oops!</h1>
+                  <a on:click={refreshPage}>Go back to Homepage</a>
+              </div>
+          {/if}
+      </div>
+      
 
         <div class="meal-details">
           <button
@@ -170,15 +177,23 @@
     function handleSearch() {
       // @ts-ignore
       const query = document.getElementById('search').value;
+      meals = []
       hasSearched = true;
       fetchMeals(query);
     }
+
+
+ function refreshPage() {
+  location.reload();
+
+ };
     
   
     // Initialize event listeners when component mounts
     onMount(() => {
       initializeEventListeners();
     });
+  
 
 
 

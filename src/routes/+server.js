@@ -19,7 +19,7 @@ export function initializeEventListeners() {
                 if (mealItem) {
                     const mealID = mealItem.getAttribute('data-id');
                     try {
-                        const data = await getMealRecipe(mealID);
+                      const data = await getMealRecipe(mealID);
                         mealRecipeModal(data.meals);
                     } catch (error) {
                         console.error('Error fetching meal recipe:', error);
