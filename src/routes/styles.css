@@ -480,4 +480,9 @@ button#recipe-close-btn {
 }
 
 
-
+h2 .title {
+    cursor: pointer;
+}
+#no-results a {
+    cursor: pointer;
+}
