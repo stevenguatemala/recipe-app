@@ -8,7 +8,7 @@ export function initializeEventListeners() {
   const recipeCloseBtn = document.getElementById("recipe-close-btn");
   const recipeDialog = document.getElementById("recipe-dialog");
   const dialogCloseBtn = document.getElementById("dialog-close-btn");
-
+// Check if all selected elements are present before adding event listeners
   if (
     searchBtn &&
     searchInput &&
@@ -60,7 +60,8 @@ function mealRecipeModal(meals) {
     console.error("No meals data available.");
     return;
   }
-  const meal = meals[0];
+  const meal = meals[0]; // Get the first meal from the array
+ // Construct the HTML to display the meal details
   const html = `
         <h2 class="recipe-title">${meal.strMeal}</h2>
         <p class="recipe-category">${meal.strCategory}</p>
@@ -75,6 +76,7 @@ function mealRecipeModal(meals) {
             <a href="${meal.strYoutube}" target="_blank">Watch Video</a>
         </div>
     `;
+    // Select the meal details content and recipe dialog elements
   const mealDetailsContent = document.querySelector(
     "#recipe-dialog .meal-details-content"
   );

@@ -27,7 +27,7 @@
     try {
       const timeout = new Promise((resolve) => {
         setTimeout(() => {
-          resolve("done");
+          resolve("done"); // Resolve after 2 seconds to simulate loading
         }, 2000);
       });
       const request = fetch(
@@ -35,27 +35,29 @@
       ); // gets data from themealDB
       const [response] = await Promise.all([request, timeout]);
       if (!response.ok) {
+        // Check if the response is not OK
         // @ts-ignore
         throw new error("Network response was not ok:", error);
       }
-      const data = await response.json(); // decodes data
-      loading.setLoading(false);
+      const data = await response.json();  // Parse the JSON response
+      loading.setLoading(false);// Set loading status to false
       fetchedMeals = Array.isArray(data.meals) ? data.meals : []; // making sure fetched meals has new data
       meals = fetchedMeals;
     } catch (error) {
-      loading.setLoading(false);
-      console.error("Error fetching meals:", error);
+      loading.setLoading(false); // Set loading status to false on error
+      console.error("Error fetching meals:", error); // Log the error
     }
   }
 
   let hasSearched = false;
 
   function handleSearch() {
+    // Function to handle search button click
     // @ts-ignore
-    const query = document.getElementById("search").value;
-    meals = [];
-    hasSearched = true;
-    fetchMeals(query);
+    const query = document.getElementById("search").value;// Get the search query from input
+    meals = []; // Reset meals array
+    hasSearched = true; 
+    fetchMeals(query);// Fetch meals based on the query
   }
 
   function refreshPage() {
@@ -64,11 +66,10 @@
 
   // Initialize event listeners when component mounts
   onMount(() => {
-    initializeEventListeners();
+    initializeEventListeners();// Call the function to set up event listeners
   });
 </script>
 
-<!-- <!DOCTYPE html> -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -140,8 +141,6 @@
               <p class="results-message">
                 Sorry, we didn't find any recipes to share!
               </p>
-              <!-- <li>Try searching a different ingredient</li>
-                  <li>If you are looking to start over, try refreshing the page</li> -->
               <h1>Oops!</h1>
               <a on:click={refreshPage}>Go back to Homepage</a>
             </div>
